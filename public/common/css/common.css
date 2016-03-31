@@ -1,0 +1,50 @@
+html, body, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html, body, .content {
+    height: 100%;
+}
+
+body {
+    background: transparent url(../../common/img/greyClouds.png) no-repeat;
+    background-size: cover;
+    font: bold 30px Verdana, Geneva, sans-serif;
+    height: 100%;
+}
+
+.debug {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: inline-block;
+    max-width: 400px;
+    overflow: auto;
+    font: normal 12px 'Lucida Console', sans-serif;
+    padding: 5px;
+    border: solid 1px #333333;
+    background-color: rgba(0,0,0,0.35);
+    color: #FFCEF6;
+}
+
+.content {
+    text-align: center;
+    padding: 34vh 40px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.bluesky {
+    color: #37CDFF;
+}
+
+.lightpurple {
+    color: #8A93C5;
+}
+
+.violet {
+    color: #5e2098;
+}

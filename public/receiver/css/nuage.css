@@ -1,0 +1,9 @@
+body {
+    width: 1280px;
+    height: 720px;
+    overflow:hidden;
+}
+
+.content {
+    font: bold 40px Verdana, Geneva, sans-serif;
+}

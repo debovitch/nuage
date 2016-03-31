@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="nuage">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Thierry Duchassin">
+        <meta name="robots" content="none">
+        <meta name="googlebot" content="none">
+
+        <title>Nuage</title>
+
+        <link href="common/css/common.css" rel="stylesheet" />
+        <link href="receiver/css/nuage.css" rel="stylesheet" />
+
+        <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+
+        <!-- lib -->
+        <script type="text/javascript" src="common/js/jquery-2.2.2.min.js"></script>
+        <script src="common/js/angular.min.js"></script>
+        <script src="common/js/angular-ui-router.min.js"></script>
+
+        <!-- app -->
+        <script src="receiver/js/router.js"></script>
+
+        <!-- services -->
+        <!--<script src="common/js/services/constantsService.js"></script>-->
+        <script src="common/js/services/tools.js"></script>
+        <script src="receiver/js/services/castReceiverManagerService.js"></script>
+        <script src="receiver/js/services/messageBusService.js"></script>
+
+        <!-- controllers -->
+        <script src="receiver/js/controllers/appController.js"></script>
+        <script src="receiver/js/controllers/splashController.js"></script>
+        <script src="receiver/js/controllers/noGameController.js"></script>
+        <script src="receiver/js/controllers/waitingPlayersController.js"></script>
+
+    </head>
+    <body ng-controller="appController">
+        <div class="debug" ng-show="displayDebugInfo">
+            <p>Debug console</p>
+        </div>
+        <div ui-view></div>
+    </body>
+</html>

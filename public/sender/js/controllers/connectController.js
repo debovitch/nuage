@@ -1,4 +1,4 @@
-angular.module('hello').controller('ConnectionController', ['$window', '$rootScope', '$scope', 'chromecast', 'tools', function($window, $rootScope, $scope, chromecast, tools) {
+angular.module('hello').controller('ConnectionController', ['$window', '$rootScope', '$scope', 'chromecast', 'debug', function($window, $rootScope, $scope, chromecast, debug) {
 
     $scope.chromecastStatus = 'Recherche de Chromecast';
 

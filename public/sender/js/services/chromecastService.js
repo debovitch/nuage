@@ -1,4 +1,4 @@
-angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', function($rootScope, chrome, tools) {
+angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'debug', function($rootScope, chrome, debug) {
     
     var applicationID = 'BA07921F';
     var namespace = 'urn:x-cast:fr.duchassin.nuage';
@@ -7,10 +7,10 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', 
     window.__onGCastApiAvailable = function(loaded, errorInfo) {
 
         if (loaded) {
-            tools.debug('Cast API loaded');
+            debug.log('Cast API loaded');
             initializeCastApi();
         } else {
-            tools.debug(errorInfo);
+            debug.log(errorInfo);
         }
     };
 
@@ -24,27 +24,27 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', 
 
     function onInitSuccess() {
 
-        tools.debug('onInitSuccess');
+        debug.log('onInitSuccess');
     }
 
     function onError(message) {
 
-        tools.debug('onError : ' + JSON.stringify(message));
+        debug.log('onError : ' + JSON.stringify(message));
     }
 
     function onSuccess(message) {
 
-        tools.debug('onSuccess : ' + message);
+        debug.log('onSuccess : ' + message);
     }
 
     function onStopAppSuccess() {
 
-        tools.debug('onStopAppSuccess');
+        debug.log('onStopAppSuccess');
     }
 
     function sessionListener(newSession) {
 
-        tools.debug('New session ID : ' + newSession.sessionId);
+        debug.log('New session ID : ' + newSession.sessionId);
         session = newSession;
         session.addUpdateListener(sessionUpdateListener);
         session.addMessageListener(namespace, onReceiverMessage);
@@ -54,7 +54,7 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', 
 
         var message = isAlive ? 'Session Updated' : 'Session Removed';
         message += ' : ' + session.sessionId;
-        tools.debug(message);
+        debug.log(message);
         if (!isAlive) {
             session = null;
             $rootScope.$broadcast('RECEIVER_DEAD');
@@ -63,17 +63,17 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', 
 
     function onReceiverMessage(namespace, message) {
 
-        tools.debug('onReceiverMessage : ' + namespace + ', ' + message);
+        debug.log('onReceiverMessage : ' + namespace + ', ' + message);
         $rootScope.$broadcast(message);
     }
 
     function receiverListener(status) {
 
         if (status === chrome.cast.ReceiverAvailability.AVAILABLE) {
-            tools.debug('Receiver found');
+            debug.log('Receiver found');
             $rootScope.$broadcast('RECEIVER_AVAILABLE');
         } else {
-            tools.debug('Receiver list empty');
+            debug.log('Receiver list empty');
         }
     }
 

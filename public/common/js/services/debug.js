@@ -1,17 +1,16 @@
 angular.module('debug', [])
 
-    .factory('tools', function() {
+    .factory('debug', function() {
 
         return {
             /**
              * Append message to debug message window
              * @param {string} message A message string
              */
-            debug : function(message) {
+            log : function(message) {
 
                 console.log(message);
-                var dw = $('.debug');
-                dw.append('<p>' + (typeof(message) == 'string' ? message : JSON.stringify(message)) + '</p>');
+                $('.debug').append('<p>' + (typeof(message) == 'string' ? message : JSON.stringify(message)) + '</p>');
             }
         };
     });

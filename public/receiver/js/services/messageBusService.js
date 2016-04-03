@@ -1,6 +1,6 @@
 angular.module('nuage').service('messageBusService',
-    ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE_NAMESPACE', 'tools',
-    function($rootScope, cast, castReceiverManagerService, MESSAGE_NAMESPACE, tools) {
+    ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE_NAMESPACE', 'debug',
+    function($rootScope, cast, castReceiverManagerService, MESSAGE_NAMESPACE, debug) {
 
     this.messageBus = null;
 
@@ -12,13 +12,13 @@ angular.module('nuage').service('messageBusService',
 
         if (this.messageBus != null) { return false; }
 
-        tools.debug('messageBusService.init');
+        debug.log('messageBusService.init');
 
         this.messageBus = castReceiverManagerService.manager.getCastMessageBus(MESSAGE_NAMESPACE);
 
         this.messageBus.onMessage = function(event) {
 
-            tools.debug('Message is [' + event.senderId + '] : ' + event.data);
+            debug.log('Message is [' + event.senderId + '] : ' + event.data);
             that.processEvent(event);
         };
 

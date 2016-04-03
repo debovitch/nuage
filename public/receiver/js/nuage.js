@@ -5,10 +5,6 @@ angular.module('nuage', ['ui.router', 'debug', 'constants'])
     .config(['$stateProvider', function($stateProvider) {
 
         $stateProvider
-            .state('splash', {
-                templateUrl : 'receiver/views/splash.html',
-                controller : 'splashController'
-            })
             .state('no-game', {
                 templateUrl : 'receiver/views/no-game.html',
                 controller : 'noGameController'
@@ -23,6 +19,4 @@ angular.module('nuage', ['ui.router', 'debug', 'constants'])
     .run(['$state', 'messageBusService', function($state, messageBusService) {
 
         messageBusService.init();
-
-        $state.go('splash');
     }]);

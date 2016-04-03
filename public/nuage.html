@@ -26,7 +26,6 @@
         <script src="receiver/js/services/messageBusService.js"></script>
 
         <script src="receiver/js/controllers/appController.js"></script>
-        <script src="receiver/js/controllers/splashController.js"></script>
         <script src="receiver/js/controllers/noGameController.js"></script>
         <script src="receiver/js/controllers/waitingPlayersController.js"></script>
     </head>
@@ -34,6 +33,11 @@
         <div class="debug" ng-show="displayDebugInfo">
             <p>Debug console</p>
         </div>
-        <div ui-view></div>
+        <div ui-view>
+            <div class="splash content">
+                <p class="bluesky">Nuage</p>
+                <p class="mt20 lightpurple">En attente de connexion</p>
+            </div>
+        </div>
     </body>
 </html>

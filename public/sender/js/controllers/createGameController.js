@@ -1,4 +1,4 @@
-angular.module('hello').controller('CreateGameController', ['$scope', 'chromecast', function($scope, chromecast) {
+angular.module('hello').controller('createGameController', ['$scope', 'chromecast', function($scope, chromecast) {
 
     $scope.createGame = function() {
 

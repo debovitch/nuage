@@ -5,12 +5,14 @@ angular.module('hello', ['ui.router', 'debug', 'constants'])
     .config(['$stateProvider', function($stateProvider) {
 
         $stateProvider
-            .state('splash', {
-                controller : 'ConnectionController',
-                templateUrl : 'sender/views/connect.html'
+            .state('connection', {
+                url : 'connection',
+                controller : 'connectionController',
+                templateUrl : 'sender/views/connection.html'
             })
-            .state('create-game', {
-                controller : 'CreateGameController',
+            .state('createGame', {
+                url : 'create-game',
+                controller : 'createGameController',
                 templateUrl : 'sender/views/create-game.html'
             });
     }])
@@ -27,5 +29,5 @@ angular.module('hello', ['ui.router', 'debug', 'constants'])
             }
         };
 
-        $state.go('splash');
+        $state.go('connection');
     }]);

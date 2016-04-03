@@ -1,19 +1,31 @@
-angular.module('hello', ['ngRoute', 'debug'])
+angular.module('hello', ['ui.router', 'debug'])
 
     .constant('chrome', chrome)
 
-    .config(function($routeProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-        $routeProvider
-            .when('/', {
+        $stateProvider
+            .state('splash', {
                 controller : 'ConnectionController',
                 templateUrl : 'sender/views/connect.html'
             })
-            .when('/create-game', {
+            .state('create-game', {
                 controller : 'CreateGameController',
                 templateUrl : 'sender/views/create-game.html'
-            })
-            .otherwise({
-                redirectTo:'/'
             });
-    });
+    }])
+
+    .run(['$state', 'chromecast', 'debug', function($state, chromecast, debug) {
+
+        window.__onGCastApiAvailable = function(loaded, errorInfo) {
+
+            if (loaded) {
+                debug.log('Cast API loaded');
+                chromecast.initializeCastApi();
+            } else {
+                debug.log(errorInfo);
+            }
+        };
+
+        $state.go('splash');
+    }]);

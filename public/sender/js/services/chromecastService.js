@@ -4,24 +4,6 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'debug', 
     var namespace = 'urn:x-cast:fr.duchassin.nuage';
     var session = null;
 
-    window.__onGCastApiAvailable = function(loaded, errorInfo) {
-
-        if (loaded) {
-            debug.log('Cast API loaded');
-            initializeCastApi();
-        } else {
-            debug.log(errorInfo);
-        }
-    };
-
-    function initializeCastApi() {
-
-        var sessionRequest = new chrome.cast.SessionRequest(applicationID);
-        var apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener);
-
-        chrome.cast.initialize(apiConfig, onInitSuccess, onError);
-    }
-
     function onInitSuccess() {
 
         debug.log('onInitSuccess');
@@ -92,6 +74,13 @@ angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'debug', 
     }
 
     return {
+        initializeCastApi : function() {
+
+            var sessionRequest = new chrome.cast.SessionRequest(applicationID);
+            var apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener);
+
+            chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+        },
         sendMessage : function(message) {
 
             if (session != null) {

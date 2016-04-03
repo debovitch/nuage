@@ -2,24 +2,35 @@
 <html ng-app="hello">
     <head>
         <meta charset="utf-8" />
-        <title>Nuage</title>
+        <meta name="author" content="Thierry Duchassin">
+        <meta name="robots" content="none">
+        <meta name="googlebot" content="none">
+
+        <title>Hello</title>
+
         <link rel="icon" href="sender/img/favicon.ico" />
         <link href="common/css/common.css" rel="stylesheet" />
         <link href="sender/css/hello.css" rel="stylesheet" />
-        <script src="common/js/jquery-2.2.2.min.js"></script>
-        <script src="common/js/angular.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+
         <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+
+        <script src="common/js/jquery-2.2.2.min.js"></script>
+        <script src="common/js/angular.min.js"></script>
+        <script src="common/js/angular-ui-router.min.js"></script>
+
         <script src="sender/js/hello.js"></script>
-        <script src="sender/js/controllers/connectController.js"></script>
-        <script src="sender/js/controllers/createGameController.js"></script>
+
         <script src="common/js/services/debug.js"></script>
         <script src="sender/js/services/chromecastService.js"></script>
+
+        <script src="sender/js/controllers/appController.js"></script>
+        <script src="sender/js/controllers/connectController.js"></script>
+        <script src="sender/js/controllers/createGameController.js"></script>
     </head>
-    <body>
-        <div class="debug">
+    <body ng-controller="appController">
+        <div class="debug" ng-show="displayDebugInfo">
             <p>Debug console</p>
         </div>
-        <ng-view><ng-view/>
+        <div ui-view></div>
     </body>
 </html>

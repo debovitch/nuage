@@ -1,29 +1,29 @@
 angular.module('nuage', ['ui.router', 'debug'])
 
-.constant('cast', cast)
-.constant('MESSAGE_NAMESPACE', 'urn:x-cast:fr.duchassin.nuage')
+    .constant('cast', cast)
+    .constant('MESSAGE_NAMESPACE', 'urn:x-cast:fr.duchassin.nuage')
 
-.config(['$stateProvider', function($stateProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-    $stateProvider
-        .state('splash', {
-            templateUrl : 'receiver/views/splash.html',
-            controller : 'splashController'
-        })
-        .state('no-game', {
-            templateUrl : 'receiver/views/no-game.html',
-            controller : 'noGameController'
-        })
-        .state('waiting-players', {
-            templateUrl : 'receiver/views/waiting-players.html',
-            controller : 'waitingPlayersController',
-            params : { initiator : '' }
-        });
-}])
+        $stateProvider
+            .state('splash', {
+                templateUrl : 'receiver/views/splash.html',
+                controller : 'splashController'
+            })
+            .state('no-game', {
+                templateUrl : 'receiver/views/no-game.html',
+                controller : 'noGameController'
+            })
+            .state('waiting-players', {
+                templateUrl : 'receiver/views/waiting-players.html',
+                controller : 'waitingPlayersController',
+                params : { initiator : '' }
+            });
+    }])
 
-.run(['$state', 'messageBusService', function($state, messageBusService) {
+    .run(['$state', 'messageBusService', function($state, messageBusService) {
 
-    messageBusService.init();
+        messageBusService.init();
 
-    $state.go('splash');
-}]);
+        $state.go('splash');
+    }]);

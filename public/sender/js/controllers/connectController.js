@@ -1,4 +1,4 @@
-angular.module('hello').controller('ConnectionController', ['$window', '$rootScope', '$scope', 'chromecast', 'debug', function($window, $rootScope, $scope, chromecast, debug) {
+angular.module('hello').controller('ConnectionController', ['$state', '$rootScope', '$scope', 'chromecast', 'debug', function($state, $rootScope, $scope, chromecast, debug) {
 
     $scope.chromecastStatus = 'Recherche de Chromecast';
 
@@ -11,7 +11,7 @@ angular.module('hello').controller('ConnectionController', ['$window', '$rootSco
 
     $rootScope.$on('senderConnected', function() {
 
-        $window.location.hash = 'create-game';
+        $state.go('create-game');
     });
 
     $scope.connect = function() {

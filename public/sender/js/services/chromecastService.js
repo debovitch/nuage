@@ -1,4 +1,4 @@
-nuageModule.factory('chromecast', ['$rootScope', 'tools', function($rootScope, tools) {
+angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'tools', function($rootScope, chrome, tools) {
     
     var applicationID = 'BA07921F';
     var namespace = 'urn:x-cast:fr.duchassin.nuage';

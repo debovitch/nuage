@@ -1,4 +1,4 @@
-nuageModule.controller('waitingPlayersController', ['$scope', '$stateParams', function($scope, $stateParams) {
+angular.module('nuage').controller('waitingPlayersController', ['$scope', '$stateParams', function($scope, $stateParams) {
 
     $scope.initiator = $stateParams.initiator;
     $scope.player = null;

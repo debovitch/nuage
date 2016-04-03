@@ -1,4 +1,4 @@
-nuageModule.controller('CreateGameController', ['$scope', 'chromecast', function($scope, chromecast) {
+angular.module('hello').controller('CreateGameController', ['$scope', 'chromecast', function($scope, chromecast) {
 
     $scope.createGame = function() {
 

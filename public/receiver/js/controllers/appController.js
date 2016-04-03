@@ -1,4 +1,4 @@
-nuageModule.controller('appController', ['$rootScope', '$scope', '$state', 'cast', 'castReceiverManagerService', function($rootScope, $scope, $state, cast, castReceiverManagerService) {
+angular.module('nuage').controller('appController', ['$rootScope', '$scope', '$state', 'cast', 'castReceiverManagerService', function($rootScope, $scope, $state, cast, castReceiverManagerService) {
 
     var appConfig = new cast.receiver.CastReceiverManager.Config();
 

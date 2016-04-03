@@ -1,3 +1,3 @@
-nuageModule.controller('splashController', ['$scope', function($scope) {
+angular.module('nuage').controller('splashController', ['$scope', function($scope) {
 
 }]);

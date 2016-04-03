@@ -1,4 +1,4 @@
-nuageModule.service('messageBusService',
+angular.module('nuage').service('messageBusService',
     ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE_NAMESPACE', 'tools',
     function($rootScope, cast, castReceiverManagerService, MESSAGE_NAMESPACE, tools) {
 

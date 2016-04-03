@@ -1,1 +1,2 @@
-nuageModule.value('MESSAGE_NAMESPACE', 'urn:x-cast:fr.duchassin.nuage');
+angular.module('constants', [])
+    .value('MESSAGE_NAMESPACE', 'urn:x-cast:fr.duchassin.nuage');

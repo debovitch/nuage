@@ -19,18 +19,18 @@ nuageModule.service('messageBusService',
         this.messageBus.onMessage = function(event) {
 
             tools.debug('Message is [' + event.senderId + '] : ' + event.data);
-            that.parseMessage(event.data);
+            that.processEvent(event);
         };
 
         return true;
     };
 
-    this.parseMessage = function(json) {
+    this.processEvent = function(event) {
 
         var message;
 
         try {
-            message = JSON.parse(json);
+            message = JSON.parse(event.data);
         } catch(e) {
             this.messageBus.broadcast('Failed to parse json : ' + json);
             return;
@@ -40,17 +40,17 @@ nuageModule.service('messageBusService',
 
             case 'connect' :
                 $rootScope.$broadcast('senderConnected');
-                that.messageBus.broadcast('senderConnected');
+                that.messageBus.send(event.senderId, 'senderConnected');
                 break;
             case 'createGame' :
                 $rootScope.$broadcast('initiatorConnected', message.username);
-                that.messageBus.broadcast(message.username + ' created game' );
+                that.messageBus.send(event.senderId, message.username + ' created game' );
                 break;
             case 'joinGame' :
                 $rootScope.$broadcast('playerConnected', message.player);
                 break;
             default :
-                this.messageBus.broadcast('Unknown service : ' + message.service);
+                that.messageBus.send(event.senderId, 'Unknown service : ' + message.service);
         }
 
         castReceiverManagerService.manager.setApplicationState(message.service)

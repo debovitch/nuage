@@ -9,15 +9,21 @@ nuageModule.controller('appController', ['$rootScope', '$scope', '$state', 'cast
 
     $scope.displayDebugInfo = true;
 
+    $scope.players = [];
+
     $rootScope.$on('senderConnected', function() {
 
         console.log('senderConnected');
-        $state.go('no-game');
+
+        if (castReceiverManagerService.manager.getSenders().length == 1) {
+            $state.go('no-game');
+        }
     });
 
     $rootScope.$on('initiatorConnected', function(event, data) {
 
         console.log('initiatorConnected', data);
+        $scope.players.push(data);
         $state.go('waiting-players', {
             initiator : data
         });

@@ -1,4 +1,4 @@
-angular.module('hello', ['ui.router', 'debug'])
+angular.module('hello', ['ui.router', 'debug', 'constants'])
 
     .constant('chrome', chrome)
 

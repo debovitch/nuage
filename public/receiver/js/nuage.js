@@ -1,7 +1,6 @@
-angular.module('nuage', ['ui.router', 'debug'])
+angular.module('nuage', ['ui.router', 'debug', 'constants'])
 
     .constant('cast', cast)
-    .constant('MESSAGE_NAMESPACE', 'urn:x-cast:fr.duchassin.nuage')
 
     .config(['$stateProvider', function($stateProvider) {
 

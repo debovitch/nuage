@@ -1,7 +1,9 @@
-angular.module('hello').factory('chromecast', ['$rootScope', 'chrome', 'debug', function($rootScope, chrome, debug) {
+angular.module('hello').factory('chromecast',
+    ['$rootScope', 'chrome', 'APP_ID', 'MESSAGE_NAMESPACE', 'debug',
+        function($rootScope, chrome, APP_ID, MESSAGE_NAMESPACE, debug) {
     
-    var applicationID = 'BA07921F';
-    var namespace = 'urn:x-cast:fr.duchassin.nuage';
+    var applicationID = APP_ID;
+    var namespace = MESSAGE_NAMESPACE;
     var session = null;
 
     function onInitSuccess() {

@@ -1,4 +1,4 @@
-angular.module('hello').factory('chromecast',
+angular.module('nuage-sender').factory('chromecast',
     ['$rootScope', 'chrome', 'APP_ID', 'MESSAGE', 'debug',
         function($rootScope, chrome, APP_ID, MESSAGE, debug) {
     
@@ -63,15 +63,6 @@ angular.module('hello').factory('chromecast',
     function stopApp() {
 
         session.stop(onStopAppSuccess, onError);
-    }
-
-    function createGame() {
-
-        var message = {
-            service : 'createGame',
-            player : $('#username').val()
-        };
-        sendMessage(JSON.stringify(message));
     }
 
     return {

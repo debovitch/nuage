@@ -1,4 +1,4 @@
-angular.module('hello').controller('connectionController', ['$state', '$rootScope', '$scope', 'chromecast', 'MESSAGE', 'debug', function($state, $rootScope, $scope, chromecast, MESSAGE, debug) {
+angular.module('nuage-sender').controller('connectionController', ['$state', '$rootScope', '$scope', 'chromecast', 'MESSAGE', 'debug', function($state, $rootScope, $scope, chromecast, MESSAGE, debug) {
 
     $scope.chromecastStatus = 'Recherche de Chromecast';
 
@@ -17,7 +17,7 @@ angular.module('hello').controller('connectionController', ['$state', '$rootScop
     $scope.connect = function() {
 
         var message = {
-            service : 'connect'
+            service : MESSAGE.s2r.connect
         };
         chromecast.sendMessage(JSON.stringify(message));
     };

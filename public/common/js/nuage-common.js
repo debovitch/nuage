@@ -1,0 +1,1 @@
+angular.module('nuage-common', ['ui.router', 'debug', 'constants']);

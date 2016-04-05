@@ -1,4 +1,4 @@
-angular.module('nuage').controller(
+angular.module('nuage-receiver').controller(
     'appController',
     ['$state', '$rootScope', '$scope', 'cast', 'castReceiverManagerService', 'MESSAGE',
     function($state, $rootScope, $scope, cast, castReceiverManagerService, MESSAGE) {
@@ -23,9 +23,9 @@ angular.module('nuage').controller(
         }
     });
 
-    $rootScope.$on('initiatorConnected', function(event, data) {
+    $rootScope.$on(MESSAGE.r2s.gameCreated, function(event, data) {
 
-        console.log('initiatorConnected', data);
+        console.log(MESSAGE.r2s.gameCreated, data);
         $scope.players.push(data);
         $state.go('waitingPlayers', {
             initiator : data

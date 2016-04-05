@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="nuage">
+<html ng-app="nuage-receiver">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Thierry Duchassin">
         <meta name="robots" content="none">
         <meta name="googlebot" content="none">
@@ -14,11 +13,12 @@
 
         <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
 
-        <script type="text/javascript" src="common/js/jquery-2.2.2.min.js"></script>
-        <script src="common/js/angular.min.js"></script>
-        <script src="common/js/angular-ui-router.min.js"></script>
+        <script src="lib/jquery-2.2.2.min.js"></script>
+        <script src="lib/angular.min.js"></script>
+        <script src="lib/angular-ui-router.min.js"></script>
 
-        <script src="receiver/js/nuage.js"></script>
+        <script src="common/js/nuage-common.js"></script>
+        <script src="receiver/js/nuage-receiver.js"></script>
 
         <script src="common/js/services/debug.js"></script>
         <script src="common/js/services/constantsService.js"></script>
@@ -26,8 +26,7 @@
         <script src="receiver/js/services/messageBusService.js"></script>
 
         <script src="receiver/js/controllers/appController.js"></script>
-        <script src="receiver/js/controllers/noGameController.js"></script>
-        <script src="receiver/js/controllers/waitingPlayersController.js"></script>
+        <script src="common/js/controllers/waitingPlayersController.js"></script>
     </head>
     <body ng-controller="appController">
         <div class="debug" ng-show="displayDebugInfo">

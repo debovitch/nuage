@@ -1,4 +1,4 @@
-angular.module('hello', ['ui.router', 'debug', 'constants'])
+angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug'])
 
     .constant('chrome', chrome)
 
@@ -14,6 +14,11 @@ angular.module('hello', ['ui.router', 'debug', 'constants'])
                 url : 'create-game',
                 controller : 'createGameController',
                 templateUrl : 'sender/views/create-game.html'
+            })
+            .state('waitingPlayers', {
+                templateUrl : 'common/views/waiting-players.html',
+                controller : 'waitingPlayersController',
+                params : { initiator : '' }
             });
     }])
 

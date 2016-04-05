@@ -1,4 +1,4 @@
-angular.module('nuage', ['ui.router', 'debug', 'constants'])
+angular.module('nuage-receiver', ['ui.router', 'nuage-common', 'constants', 'debug'])
 
     .constant('cast', cast)
 
@@ -6,11 +6,10 @@ angular.module('nuage', ['ui.router', 'debug', 'constants'])
 
         $stateProvider
             .state('noGame', {
-                templateUrl : 'receiver/views/no-game.html',
-                controller : 'noGameController'
+                templateUrl : 'receiver/views/no-game.html'
             })
             .state('waitingPlayers', {
-                templateUrl : 'receiver/views/waiting-players.html',
+                templateUrl : 'common/views/waiting-players.html',
                 controller : 'waitingPlayersController',
                 params : { initiator : '' }
             });

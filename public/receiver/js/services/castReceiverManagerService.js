@@ -1,4 +1,4 @@
-angular.module('nuage').service('castReceiverManagerService', ['cast', 'debug', function(cast, debug) {
+angular.module('nuage-receiver').service('castReceiverManagerService', ['cast', 'debug', function(cast, debug) {
 
     this.manager = null;
 

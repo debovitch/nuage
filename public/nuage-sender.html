@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="hello">
+<html ng-app="nuage-sender">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Thierry Duchassin">
         <meta name="robots" content="none">
         <meta name="googlebot" content="none">
 
-        <title>Hello</title>
+        <title>Nuage</title>
 
         <link rel="icon" href="sender/img/favicon.ico" />
         <link href="common/css/common.css" rel="stylesheet" />
@@ -14,11 +15,12 @@
 
         <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 
-        <script src="common/js/jquery-2.2.2.min.js"></script>
-        <script src="common/js/angular.min.js"></script>
-        <script src="common/js/angular-ui-router.min.js"></script>
+        <script src="lib/jquery-2.2.2.min.js"></script>
+        <script src="lib/angular.min.js"></script>
+        <script src="lib/angular-ui-router.min.js"></script>
 
-        <script src="sender/js/hello.js"></script>
+        <script src="common/js/nuage-common.js"></script>
+        <script src="sender/js/nuage-sender.js"></script>
 
         <script src="common/js/services/constantsService.js"></script>
         <script src="common/js/services/debug.js"></script>
@@ -27,6 +29,7 @@
         <script src="sender/js/controllers/appController.js"></script>
         <script src="sender/js/controllers/connectionController.js"></script>
         <script src="sender/js/controllers/createGameController.js"></script>
+        <script src="common/js/controllers/waitingPlayersController.js"></script>
     </head>
     <body ng-controller="appController">
         <div class="debug" ng-show="displayDebugInfo">

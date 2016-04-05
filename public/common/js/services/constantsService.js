@@ -3,9 +3,11 @@ angular.module('constants', [])
     .constant('MESSAGE', {
         namespace : 'urn:x-cast:fr.duchassin.nuage',
         s2r : {
-
+            connect : 's2r.connect',
+            createGame : 's2r.createGame'
         },
         r2s : {
-            noGameAvailable : 'MESSAGE.r2s.noGameAvailable'
+            noGameAvailable : 'r2s.noGameAvailable',
+            gameCreated : 'r2s.gameCreated'
         }
     });

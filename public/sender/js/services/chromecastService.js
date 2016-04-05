@@ -1,9 +1,8 @@
 angular.module('hello').factory('chromecast',
-    ['$rootScope', 'chrome', 'APP_ID', 'MESSAGE_NAMESPACE', 'debug',
-        function($rootScope, chrome, APP_ID, MESSAGE_NAMESPACE, debug) {
+    ['$rootScope', 'chrome', 'APP_ID', 'MESSAGE', 'debug',
+        function($rootScope, chrome, APP_ID, MESSAGE, debug) {
     
     var applicationID = APP_ID;
-    var namespace = MESSAGE_NAMESPACE;
     var session = null;
 
     function onInitSuccess() {
@@ -31,7 +30,7 @@ angular.module('hello').factory('chromecast',
         debug.log('New session ID : ' + newSession.sessionId);
         session = newSession;
         session.addUpdateListener(sessionUpdateListener);
-        session.addMessageListener(namespace, onReceiverMessage);
+        session.addMessageListener(MESSAGE.namespace, onReceiverMessage);
     }
 
     function sessionUpdateListener(isAlive) {
@@ -86,12 +85,12 @@ angular.module('hello').factory('chromecast',
         sendMessage : function(message) {
 
             if (session != null) {
-                session.sendMessage(namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
+                session.sendMessage(MESSAGE.namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
             } else {
                 chrome.cast.requestSession(function(newSession) {
 
                     sessionListener(newSession);
-                    session.sendMessage(namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
+                    session.sendMessage(MESSAGE.namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
                 }, onError);
             }
         }

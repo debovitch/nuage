@@ -5,11 +5,11 @@ angular.module('nuage', ['ui.router', 'debug', 'constants'])
     .config(['$stateProvider', function($stateProvider) {
 
         $stateProvider
-            .state('no-game', {
+            .state('noGame', {
                 templateUrl : 'receiver/views/no-game.html',
                 controller : 'noGameController'
             })
-            .state('waiting-players', {
+            .state('waitingPlayers', {
                 templateUrl : 'receiver/views/waiting-players.html',
                 controller : 'waitingPlayersController',
                 params : { initiator : '' }

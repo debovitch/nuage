@@ -1,4 +1,7 @@
-angular.module('nuage').controller('appController', ['$state', '$rootScope', '$scope', 'cast', 'castReceiverManagerService', function($state, $rootScope, $scope, cast, castReceiverManagerService) {
+angular.module('nuage').controller(
+    'appController',
+    ['$state', '$rootScope', '$scope', 'cast', 'castReceiverManagerService', 'MESSAGE',
+    function($state, $rootScope, $scope, cast, castReceiverManagerService, MESSAGE) {
 
     var appConfig = new cast.receiver.CastReceiverManager.Config();
 
@@ -11,12 +14,12 @@ angular.module('nuage').controller('appController', ['$state', '$rootScope', '$s
 
     $scope.players = [];
 
-    $rootScope.$on('senderConnected', function() {
+    $rootScope.$on(MESSAGE.r2s.noGameAvailable, function() {
 
-        console.log('senderConnected');
+        console.log(MESSAGE.r2s.noGameAvailable);
 
         if (castReceiverManagerService.manager.getSenders().length == 1) {
-            $state.go('no-game');
+            $state.go('noGame');
         }
     });
 
@@ -24,7 +27,7 @@ angular.module('nuage').controller('appController', ['$state', '$rootScope', '$s
 
         console.log('initiatorConnected', data);
         $scope.players.push(data);
-        $state.go('waiting-players', {
+        $state.go('waitingPlayers', {
             initiator : data
         });
     });

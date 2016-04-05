@@ -1,6 +1,6 @@
 angular.module('nuage').service('messageBusService',
-    ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE_NAMESPACE', 'debug',
-    function($rootScope, cast, castReceiverManagerService, MESSAGE_NAMESPACE, debug) {
+    ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE', 'debug',
+    function($rootScope, cast, castReceiverManagerService, MESSAGE, debug) {
 
     this.messageBus = null;
 
@@ -14,7 +14,7 @@ angular.module('nuage').service('messageBusService',
 
         debug.log('messageBusService.init');
 
-        this.messageBus = castReceiverManagerService.manager.getCastMessageBus(MESSAGE_NAMESPACE);
+        this.messageBus = castReceiverManagerService.manager.getCastMessageBus(MESSAGE.namespace);
 
         this.messageBus.onMessage = function(event) {
 
@@ -39,8 +39,8 @@ angular.module('nuage').service('messageBusService',
         switch(message.service) {
 
             case 'connect' :
-                $rootScope.$broadcast('senderConnected');
-                that.messageBus.send(event.senderId, 'senderConnected');
+                $rootScope.$broadcast(MESSAGE.r2s.noGameAvailable);
+                that.messageBus.send(event.senderId, MESSAGE.r2s.noGameAvailable);
                 break;
             case 'createGame' :
                 $rootScope.$broadcast('initiatorConnected', message.username);

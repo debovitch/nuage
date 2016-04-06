@@ -16,7 +16,7 @@
         <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 
         <script src="lib/jquery-2.2.2.min.js"></script>
-        <script src="lib/angular.min.js"></script>
+        <script src="lib/angular.js"></script>
         <script src="lib/angular-ui-router.min.js"></script>
 
         <script src="common/js/nuage-common.js"></script>
@@ -27,14 +27,18 @@
         <script src="sender/js/services/chromecastService.js"></script>
 
         <script src="sender/js/controllers/appController.js"></script>
+        <script src="common/js/controllers/debugController.js"></script>
+        <script src="sender/js/controllers/usersController.js"></script>
         <script src="sender/js/controllers/connectionController.js"></script>
         <script src="sender/js/controllers/createGameController.js"></script>
         <script src="common/js/controllers/waitingPlayersController.js"></script>
     </head>
     <body ng-controller="appController">
-        <div class="debug" ng-show="displayDebugInfo">
+        <div ng-controller="debugController" class="debug" ng-show="displayDebugInfo">
             <p>Debug console</p>
+            <p ng-repeat="message in messages track by $index">{{ message }}</p>
         </div>
+        <div ng-controller="usersController"></div>
         <div ui-view></div>
     </body>
 </html>

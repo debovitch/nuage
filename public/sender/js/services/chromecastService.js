@@ -15,11 +15,6 @@ angular.module('nuage-sender').factory('chromecast',
         debug.log('onError : ' + JSON.stringify(message));
     }
 
-    function onSuccess(message) {
-
-        debug.log('onSuccess : ' + message);
-    }
-
     function onStopAppSuccess() {
 
         debug.log('onStopAppSuccess');
@@ -66,6 +61,10 @@ angular.module('nuage-sender').factory('chromecast',
     }
 
     return {
+        onSuccess : function(message) {
+
+            debug.log('Message sent : ' + message);
+        },
         initializeCastApi : function() {
 
             var sessionRequest = new chrome.cast.SessionRequest(applicationID);
@@ -75,13 +74,14 @@ angular.module('nuage-sender').factory('chromecast',
         },
         sendMessage : function(message) {
 
+            var that = this;
             if (session != null) {
-                session.sendMessage(MESSAGE.namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
+                session.sendMessage(MESSAGE.namespace, message, that.onSuccess(message), onError);
             } else {
                 chrome.cast.requestSession(function(newSession) {
 
                     sessionListener(newSession);
-                    session.sendMessage(MESSAGE.namespace, message, onSuccess.bind(this, 'Message sent : ' + message), onError);
+                    session.sendMessage(MESSAGE.namespace, message, that.onSuccess(message), onError);
                 }, onError);
             }
         }

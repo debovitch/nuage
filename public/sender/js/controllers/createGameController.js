@@ -8,7 +8,7 @@ angular.module('nuage-sender').controller('createGameController', ['$rootScope',
             username : $scope.username
         };
         chromecast.sendMessage(JSON.stringify(message));
-    }
+    };
 
     $rootScope.$on(MESSAGE.r2s.gameCreated, function() {
 

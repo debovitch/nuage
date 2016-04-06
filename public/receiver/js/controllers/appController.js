@@ -16,11 +16,7 @@ angular.module('nuage-receiver').controller(
 
     $rootScope.$on(MESSAGE.r2s.noGameAvailable, function() {
 
-        console.log(MESSAGE.r2s.noGameAvailable);
-
-        if (castReceiverManagerService.manager.getSenders().length == 1) {
-            $state.go('noGame');
-        }
+        $state.go('noGame');
     });
 
     $rootScope.$on(MESSAGE.r2s.gameCreated, function(event, data) {

@@ -1,6 +1,6 @@
 angular.module('debug', [])
 
-    .factory('debug', function() {
+    .factory('debug', ['$rootScope', function($rootScope) {
 
         return {
             /**
@@ -10,7 +10,7 @@ angular.module('debug', [])
             log : function(message) {
 
                 console.log(message);
-                $('.debug').append('<p>' + (typeof(message) == 'string' ? message : JSON.stringify(message)) + '</p>');
+                $rootScope.$broadcast('debug', message);
             }
         };
-    });
+    }]);

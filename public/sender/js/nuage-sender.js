@@ -6,31 +6,34 @@ angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug
 
         $stateProvider
             .state('connection', {
-                url : 'connection',
+                url : '/connection',
                 controller : 'connectionController',
                 templateUrl : 'sender/views/connection.html'
             })
             .state('createGame', {
-                url : 'create-game',
+                url : '/createGame',
                 controller : 'createGameController',
                 templateUrl : 'sender/views/create-game.html'
             })
             .state('waitingPlayers', {
+                url : '/waitingPlayers',
                 templateUrl : 'common/views/waiting-players.html',
                 controller : 'waitingPlayersController',
-                params : { initiator : '' }
+                params : {
+                    initiator : ''
+                }
             });
     }])
 
-    .run(['$state', 'chromecast', 'debug', function($state, chromecast, debug) {
+    .run(['$state', 'chromecast', 'debug', function($state, chromecast) {
 
         window.__onGCastApiAvailable = function(loaded, errorInfo) {
 
             if (loaded) {
-                debug.log('Cast API loaded');
+                console.log('Cast API loaded');
                 chromecast.initializeCastApi();
             } else {
-                debug.log(errorInfo);
+                console.log('Cast API not loaded', errorInfo);
             }
         };
 

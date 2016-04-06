@@ -39,8 +39,10 @@ angular.module('nuage-receiver').service('messageBusService',
         switch(message.service) {
 
             case MESSAGE.s2r.connect :
-                $rootScope.$broadcast(MESSAGE.r2s.noGameAvailable);
-                that.messageBus.send(event.senderId, MESSAGE.r2s.noGameAvailable);
+                if (castReceiverManagerService.manager.getSenders().length == 1) {
+                    $rootScope.$broadcast(MESSAGE.r2s.noGameAvailable);
+                    that.messageBus.send(event.senderId, MESSAGE.r2s.noGameAvailable);
+                }
                 break;
             case MESSAGE.s2r.createGame :
                 $rootScope.$broadcast(MESSAGE.r2s.gameCreated, message.username);

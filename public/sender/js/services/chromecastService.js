@@ -7,22 +7,22 @@ angular.module('nuage-sender').factory('chromecast',
 
     function onInitSuccess() {
 
-        debug.log('onInitSuccess');
+        debug.chromecast('onInitSuccess');
     }
 
     function onError(message) {
 
-        debug.log('onError : ' + JSON.stringify(message));
+        debug.chromecast('onError : ' + JSON.stringify(message));
     }
 
     function onStopAppSuccess() {
 
-        debug.log('onStopAppSuccess');
+        debug.chromecast('onStopAppSuccess');
     }
 
     function sessionListener(newSession) {
 
-        debug.log('New session ID : ' + newSession.sessionId);
+        debug.chromecast('New session ID : ' + newSession.sessionId);
         session = newSession;
         session.addUpdateListener(sessionUpdateListener);
         session.addMessageListener(MESSAGE.namespace, onReceiverMessage);
@@ -32,7 +32,7 @@ angular.module('nuage-sender').factory('chromecast',
 
         var message = isAlive ? 'Session Updated' : 'Session Removed';
         message += ' : ' + session.sessionId;
-        debug.log(message);
+        debug.chromecast(message);
         if (!isAlive) {
             session = null;
             $rootScope.$broadcast('RECEIVER_DEAD');
@@ -41,17 +41,17 @@ angular.module('nuage-sender').factory('chromecast',
 
     function onReceiverMessage(namespace, message) {
 
-        debug.log('onReceiverMessage : ' + namespace + ', ' + message);
+        debug.receiver(message);
         $rootScope.$broadcast(message);
     }
 
     function receiverListener(status) {
 
         if (status === chrome.cast.ReceiverAvailability.AVAILABLE) {
-            debug.log('Receiver found');
+            debug.chromecast('Receiver found');
             $rootScope.$broadcast('RECEIVER_AVAILABLE');
         } else {
-            debug.log('Receiver list empty');
+            debug.chromecast('Receiver list empty');
         }
     }
 
@@ -63,7 +63,7 @@ angular.module('nuage-sender').factory('chromecast',
     return {
         onSuccess : function(message) {
 
-            debug.log('Message sent : ' + message);
+            debug.sender(message);
         },
         initializeCastApi : function() {
 

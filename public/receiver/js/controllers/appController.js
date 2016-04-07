@@ -21,7 +21,6 @@ angular.module('nuage-receiver').controller(
 
     $rootScope.$on(MESSAGE.r2s.gameCreated, function(event, data) {
 
-        console.log(MESSAGE.r2s.gameCreated, data);
         $scope.players.push(data);
         $state.go('waitingPlayers', {
             initiator : data

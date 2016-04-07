@@ -17,8 +17,6 @@ body {
 
 .debug {
     position: fixed;
-    top: 20px;
-    left: 20px;
     display: inline-block;
     max-width: 400px;
     overflow: auto;
@@ -27,6 +25,21 @@ body {
     border: solid 1px #333333;
     background-color: rgba(0,0,0,0.35);
     color: #FFCEF6;
+}
+
+.chromecast-debug {
+    top: 20px;
+    left: 20px;
+}
+
+.receiver-debug {
+    top: 20px;
+    right: 20px;
+}
+
+.sender-debug {
+    bottom: 20px;
+    left: 20px;
 }
 
 .content {

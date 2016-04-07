@@ -1,4 +1,5 @@
-angular.module('nuage-receiver').service('castReceiverManagerService', ['cast', 'debug', function(cast, debug) {
+angular.module('nuage-receiver').service('castReceiverManagerService',
+    ['cast', 'debug', function(cast, debug) {
 
     this.manager = null;
 
@@ -14,18 +15,18 @@ angular.module('nuage-receiver').service('castReceiverManagerService', ['cast', 
 
         this.manager.onReady = function(event) {
 
-            debug.log('Received Ready event: ' + JSON.stringify(event.data));
+            debug.chromecast('onReady : ' + JSON.stringify(event.data));
             this.setApplicationState('Nuage is ready');
         };
 
         this.manager.onSenderConnected = function(event) {
 
-            debug.log('Received Sender Connected event: ' + event.data);
+            debug.chromecast('onSenderConnected : ' + JSON.stringify(event.data));
         };
 
         this.manager.onSenderDisconnected = function(event) {
 
-            debug.log('Received Sender Disconnected event: ' + event.data);
+            debug.chromecast('onSenderDisconnected : ' + JSON.stringify(event.data));
             if (this.getSenders().length == 0 &&
                 event.reason == cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
                 window.close();

@@ -12,13 +12,13 @@ angular.module('nuage-receiver').service('messageBusService',
 
         if (this.messageBus != null) { return false; }
 
-        debug.log('messageBusService.init');
+        console.log('messageBusService.init');
 
         this.messageBus = castReceiverManagerService.manager.getCastMessageBus(MESSAGE.namespace);
 
         this.messageBus.onMessage = function(event) {
 
-            debug.log('Message is [' + event.senderId + '] : ' + event.data);
+            debug.sender(event.senderId + ' : ' + event.data);
             that.processEvent(event);
         };
 
@@ -32,7 +32,8 @@ angular.module('nuage-receiver').service('messageBusService',
         try {
             message = JSON.parse(event.data);
         } catch(e) {
-            this.messageBus.broadcast('Failed to parse json : ' + json);
+            that.messageBus.send(event.senderId, 'Failed to parse json : ' + event.data);
+            debug.receiver('To ' + event.senderId + ' : Failed to parse json : ' + event.data);
             return;
         }
 
@@ -42,17 +43,20 @@ angular.module('nuage-receiver').service('messageBusService',
                 if (castReceiverManagerService.manager.getSenders().length == 1) {
                     $rootScope.$broadcast(MESSAGE.r2s.noGameAvailable);
                     that.messageBus.send(event.senderId, MESSAGE.r2s.noGameAvailable);
+                    debug.receiver(event.senderId + ' : ' + MESSAGE.r2s.noGameAvailable);
                 }
                 break;
             case MESSAGE.s2r.createGame :
                 $rootScope.$broadcast(MESSAGE.r2s.gameCreated, message.username);
                 that.messageBus.send(event.senderId, MESSAGE.r2s.gameCreated);
+                debug.receiver(event.senderId + ' : ' + MESSAGE.r2s.gameCreated);
                 break;
             case 'joinGame' :
                 $rootScope.$broadcast('playerConnected', message.player);
                 break;
             default :
                 that.messageBus.send(event.senderId, 'Unknown service : ' + message.service);
+                debug.receiver('To ' + event.senderId + ' : Unknown service : ' + message.service);
         }
 
         castReceiverManagerService.manager.setApplicationState(message.service)

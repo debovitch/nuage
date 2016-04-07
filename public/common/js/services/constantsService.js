@@ -1,5 +1,11 @@
 angular.module('constants', [])
+
     .constant('APP_ID', 'BA07921F')
+    .constant('EVENT', {
+        chromecast : 'EVENT.chromecast',
+        sender : 'EVENT.sender',
+        receiver : 'EVENT.receiver'
+    })
     .constant('MESSAGE', {
         namespace : 'urn:x-cast:fr.duchassin.nuage',
         s2r : {

@@ -26,18 +26,32 @@
         <script src="sender/js/services/chromecastService.js"></script>
 
         <script src="sender/js/controllers/appController.js"></script>
-        <script src="common/js/controllers/debugController.js"></script>
+        <script src="common/js/controllers/chromecastDebugController.js"></script>
+        <script src="common/js/controllers/senderMessagesDebugController.js"></script>
+        <script src="common/js/controllers/receiverMessagesDebugController.js"></script>
         <script src="common/js/controllers/usersController.js"></script>
         <script src="sender/js/controllers/connectionController.js"></script>
         <script src="sender/js/controllers/createGameController.js"></script>
         <script src="common/js/controllers/waitingPlayersController.js"></script>
     </head>
     <body ng-controller="appController">
-        <div ng-controller="debugController" class="debug" ng-show="displayDebugInfo">
-            <p>Debug console</p>
+        <div ng-controller="chromecastDebugController" class="debug chromecast-debug" ng-show="displayDebugInfo">
+            <p>CHROMECAST</p>
+            <hr/>
+            <p ng-repeat="message in messages track by $index">{{ message }}</p>
+        </div>
+        <div ng-controller="receiverMessagesDebugController" class="debug receiver-debug" ng-show="displayDebugInfo">
+            <p>RECEIVER</p>
+            <hr/>
+            <p ng-repeat="message in messages track by $index">{{ message }}</p>
+        </div>
+        <div ng-controller="senderMessagesDebugController" class="debug sender-debug" ng-show="displayDebugInfo">
+            <p>SENDER</p>
+            <hr/>
             <p ng-repeat="message in messages track by $index">{{ message }}</p>
         </div>
         <div ng-controller="usersController"></div>
+
         <div ui-view></div>
     </body>
 </html>

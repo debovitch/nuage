@@ -1,6 +1,6 @@
 angular.module('nuage-receiver').service('messageBusService',
-    ['$rootScope', 'cast', 'castReceiverManagerService', 'MESSAGE', 'debug',
-    function($rootScope, cast, castReceiverManagerService, MESSAGE, debug) {
+    ['$rootScope', 'castReceiverManagerService', 'gameManager', 'MESSAGE', 'debug',
+    function($rootScope, castReceiverManagerService, gameManager, MESSAGE, debug) {
 
     this.messageBus = null;
 
@@ -27,37 +27,61 @@ angular.module('nuage-receiver').service('messageBusService',
 
     this.processEvent = function(event) {
 
-        var message;
+        var response = {};
 
         try {
-            message = JSON.parse(event.data);
+            var message = JSON.parse(event.data);
         } catch(e) {
-            that.messageBus.send(event.senderId, 'Failed to parse json : ' + event.data);
-            debug.receiver('To ' + event.senderId + ' : Failed to parse json : ' + event.data);
+            response.service = 'Error';
+            reponse.message = 'Failed to parse json : ' + event.data;
+            that.messageBus.send(event.senderId, JSON.stringify(response));
+            debug.receiver('To ' + event.senderId + ' : ' + response.message);
             return;
         }
 
         switch(message.service) {
 
             case MESSAGE.s2r.connect :
+
+                gameManager.senders.push({
+                    id : event.senderId
+                });
+
                 if (castReceiverManagerService.manager.getSenders().length == 1) {
-                    $rootScope.$broadcast(MESSAGE.r2s.noGameAvailable);
-                    that.messageBus.send(event.senderId, MESSAGE.r2s.noGameAvailable);
-                    debug.receiver(event.senderId + ' : ' + MESSAGE.r2s.noGameAvailable);
+
+                    response.service = MESSAGE.r2s.noGameAvailable;
+
+                    $rootScope.$broadcast(response.service);
+
+                } else if (castReceiverManagerService.manager.getSenders().length == 2) {
+
+                    response.service = MESSAGE.r2s.gameAvailable;
+                    response.initiator = gameManager.getInitiator().username;
                 }
                 break;
+
             case MESSAGE.s2r.createGame :
+
+                var sender = gameManager.getSenderById(event.senderId);
+                sender.username = message.username;
+                sender.initiator = true;
+
+                response.service = MESSAGE.r2s.gameCreated;
+
                 $rootScope.$broadcast(MESSAGE.r2s.gameCreated, message.username);
-                that.messageBus.send(event.senderId, MESSAGE.r2s.gameCreated);
-                debug.receiver(event.senderId + ' : ' + MESSAGE.r2s.gameCreated);
                 break;
+
             case 'joinGame' :
+
                 $rootScope.$broadcast('playerConnected', message.player);
                 break;
+
             default :
-                that.messageBus.send(event.senderId, 'Unknown service : ' + message.service);
-                debug.receiver('To ' + event.senderId + ' : Unknown service : ' + message.service);
+                response.service = 'Unknown service : ' + message.service;
         }
+
+        that.messageBus.send(event.senderId, JSON.stringify(response));
+        debug.receiver('To ' + event.senderId + ' : ' + response.service);
 
         castReceiverManagerService.manager.setApplicationState(message.service)
     };

@@ -22,6 +22,14 @@ angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug
                 params : {
                     initiator : ''
                 }
+            })
+            .state('gameAvailable', {
+                url : '/gameAvailable',
+                templateUrl : 'sender/views/game-available.html',
+                controller : 'gameAvailableController',
+                params : {
+                    initiator : ''
+                }
             });
     }])
 

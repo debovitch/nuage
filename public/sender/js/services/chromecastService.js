@@ -41,8 +41,18 @@ angular.module('nuage-sender').factory('chromecast',
 
     function onReceiverMessage(namespace, message) {
 
-        debug.receiver(message);
-        $rootScope.$broadcast(message);
+        if (namespace != MESSAGE.namespace) {
+            debug.chromecast('Unknown namespace : ' + namespace);
+        }
+        try {
+            message = JSON.parse(message);
+        } catch(e) {
+            debug.chromecast('Failed to parse json : ' + message);
+            return;
+        }
+
+        debug.receiver(message.service);
+        $rootScope.$broadcast(message.service, message);
     }
 
     function receiverListener(status) {

@@ -1,22 +1,30 @@
 angular.module('nuage-common').controller('waitingPlayersController',
-    ['$rootScope', '$scope', '$stateParams', 'MESSAGE', function($rootScope, $scope, $stateParams, MESSAGE) {
+    ['$rootScope', '$scope', '$stateParams', 'EVENT', 'MESSAGE',
+        function($rootScope, $scope, $stateParams, EVENT, MESSAGE) {
+
+    $scope.start = false;
 
     $rootScope.$on(MESSAGE.r2s.gameJoined, function(event, data) {
 
         $scope.$apply(function() {
 
-            refresh(data.players);
+            refresh(data.players, data.receiver);
         });
     });
 
-    function refresh(players) {
+    function refresh(players, receiver) {
 
-        $scope.initiator = players.find(function(player) {
+        $scope.initiatorState = 'Partie créée par ' + players.find(function(player) {
             return player.initiator;
         }).username;
 
         $scope.players = players.filter(function(player) {
             return !player.initiator;
+        });
+
+        $scope.players = $scope.players.map(function(player) {
+            player.state = player.username + ' a rejoint la partie';
+            return player;
         });
 
         var missingPlayers = 3 - players.length;
@@ -25,10 +33,26 @@ angular.module('nuage-common').controller('waitingPlayersController',
             $scope.waitingMorePlayers = 'En attente de deux joueurs supplémentaires';
         } else if (missingPlayers == 1) {
             $scope.waitingMorePlayers = 'En attente d\'un joueur supplémentaire';
-        } else if (missingPlayers == 0) {
-
+        } else if (missingPlayers <= 0) {
+            $scope.waitingMorePlayers =  'Il y a suffisamment de joueurs pour démarrer';
+            if (!receiver) {
+                $scope.start = true;
+            }
         }
     }
+
+    $scope.ready = function() {
+
+        $rootScope.$broadcast(EVENT.readyToPlay);
+    };
+
+    $rootScope.$on(MESSAGE.r2s.readyToPlay, function(event, data) {
+
+        $scope.$apply(function() {
+
+            refresh(data.players, data.receiver);
+        });
+    });
 
     refresh($stateParams.players);
 }]);

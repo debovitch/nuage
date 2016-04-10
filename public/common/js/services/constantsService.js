@@ -4,19 +4,23 @@ angular.module('constants', [])
     .constant('EVENT', {
         chromecast : 'EVENT.chromecast',
         sender : 'EVENT.sender',
-        receiver : 'EVENT.receiver'
+        receiver : 'EVENT.receiver',
+        readyToPlay : 'EVENT.readyToPlay'
     })
     .constant('MESSAGE', {
         namespace : 'urn:x-cast:fr.duchassin.nuage',
         s2r : {
             connect : 's2r.connect',
             createGame : 's2r.createGame',
-            joinGame : 's2r.joinGame'
+            joinGame : 's2r.joinGame',
+            readyToPlay : 's2r.readyToPlay'
         },
         r2s : {
             noGameAvailable : 'r2s.noGameAvailable',
             gameCreated : 'r2s.gameCreated',
             gameAvailable : 'r2s.gameAvailable',
-            gameJoined : 'r2s.gameJoined'
+            gameJoined : 'r2s.gameJoined',
+            playerIsReady : 'playerIsReady',
+            everybodyIsReady : 'everybodyIsReady'
         }
     });

@@ -22,4 +22,15 @@ angular.module('nuage-receiver').service('gameManager', [function() {
             return typeof(sender.username) != 'undefined';
         });
     };
+
+    this.isEverybodyReadyToPlay = function() {
+
+        var players = this.getPlayers();
+        for (var i = 0; i < players.length; ++i) {
+            if (!players[i].readyToPlay) {
+                return false;
+            }
+        }
+        return true;
+    };
 }]);

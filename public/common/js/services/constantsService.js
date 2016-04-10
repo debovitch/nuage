@@ -16,6 +16,7 @@ angular.module('constants', [])
         r2s : {
             noGameAvailable : 'r2s.noGameAvailable',
             gameCreated : 'r2s.gameCreated',
-            gameAvailable : 'r2s.gameAvailable'
+            gameAvailable : 'r2s.gameAvailable',
+            gameJoined : 'r2s.gameJoined'
         }
     });

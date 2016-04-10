@@ -1,4 +1,6 @@
-angular.module('nuage-sender').controller('gameAvailableController', ['$scope', '$stateParams', function($scope, $stateParams) {
+angular.module('nuage-sender').controller('gameAvailableController',
+    ['$rootScope', '$scope', '$state', '$stateParams', 'chromecast', 'MESSAGE',
+        function($rootScope, $scope, $state, $stateParams, chromecast, MESSAGE) {
 
     $scope.initiator = $stateParams.initiator;
 

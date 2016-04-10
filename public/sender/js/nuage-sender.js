@@ -20,7 +20,7 @@ angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug
                 templateUrl : 'common/views/waiting-players.html',
                 controller : 'waitingPlayersController',
                 params : {
-                    initiator : ''
+                    players : []
                 }
             })
             .state('gameAvailable', {

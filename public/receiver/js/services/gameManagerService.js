@@ -15,4 +15,11 @@ angular.module('nuage-receiver').service('gameManager', [function() {
             return sender.id == senderId;
         });
     };
+
+    this.getPlayers = function() {
+
+        return this.senders.filter(function(sender) {
+            return typeof(sender.username) != 'undefined';
+        });
+    };
 }]);

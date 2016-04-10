@@ -9,16 +9,6 @@ angular.module('nuage-sender').controller('connectionController', ['$state', '$r
         });
     });
 
-    $rootScope.$on(MESSAGE.r2s.noGameAvailable, function() {
-
-        $state.go('createGame');
-    });
-
-    $rootScope.$on(MESSAGE.r2s.gameAvailable, function() {
-
-        $state.go('gameAvailable');
-    });
-
     $scope.connect = function() {
 
         var message = {

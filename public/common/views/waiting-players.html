@@ -1,5 +1,5 @@
 <div class="waiting-players content">
     <p class="bluesky">Partie créée par {{ initiator }}</p>
-    <p class="mt20 bluesky" ng-if="player">{{ player }} a rejoint la partie</p>
+    <p class="mt20 bluesky" ng-repeat="player in players">{{ player.username }} a rejoint la partie</p>
     <p class="mt40 lightpurple">{{ waitingMorePlayers }}</p>
 </div>

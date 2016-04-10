@@ -15,12 +15,12 @@ angular.module('debug', ['constants'])
             },
             sender : function(message) {
 
-                console.log(message);
+                console.log(JSON.stringify(message));
                 $rootScope.$broadcast(EVENT.sender, message);
             },
             receiver : function(message) {
 
-                console.log(message);
+                console.log(JSON.stringify(message));
                 $rootScope.$broadcast(EVENT.receiver, message);
             }
         };

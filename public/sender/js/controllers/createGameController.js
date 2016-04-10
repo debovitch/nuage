@@ -9,11 +9,4 @@ angular.module('nuage-sender').controller('createGameController', ['$rootScope',
         };
         chromecast.sendMessage(message);
     };
-
-    $rootScope.$on(MESSAGE.r2s.gameCreated, function() {
-
-        $state.go('waitingPlayers', {
-            initiator : $scope.username
-        });
-    });
 }]);

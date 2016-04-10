@@ -67,14 +67,25 @@ angular.module('nuage-receiver').service('messageBusService',
                 sender.initiator = true;
 
                 response.service = MESSAGE.r2s.gameCreated;
+                response.players = gameManager.getPlayers();
 
-                $rootScope.$broadcast(MESSAGE.r2s.gameCreated, message.username);
+                $rootScope.$broadcast(response.service, response);
                 break;
 
-            case 'joinGame' :
+            case MESSAGE.s2r.joinGame :
 
-                $rootScope.$broadcast('playerConnected', message.player);
-                break;
+                var sender = gameManager.getSenderById(event.senderId);
+                sender.username = message.username;
+                sender.initiator = false;
+
+                response.service = MESSAGE.r2s.gameJoined;
+                response.players = gameManager.getPlayers();
+
+                $rootScope.$broadcast(response.service, response);
+                that.messageBus.broadcast(JSON.stringify(response));
+                debug.receiver('To all : ' + response.service);
+                castReceiverManagerService.manager.setApplicationState(message.service);
+                return;
 
             default :
                 response.service = 'Unknown service : ' + message.service;

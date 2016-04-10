@@ -12,8 +12,6 @@ angular.module('nuage-receiver').controller(
 
     $scope.displayDebugInfo = true;
 
-    $scope.players = [];
-
     $rootScope.$on(MESSAGE.r2s.noGameAvailable, function() {
 
         $state.go('noGame');
@@ -21,10 +19,7 @@ angular.module('nuage-receiver').controller(
 
     $rootScope.$on(MESSAGE.r2s.gameCreated, function(event, data) {
 
-        $scope.players.push(data);
-        $state.go('waitingPlayers', {
-            initiator : data
-        });
+        $state.go('waitingPlayers', data);
     });
 }]);
 

@@ -11,7 +11,9 @@ angular.module('nuage-receiver', ['ui.router', 'nuage-common', 'constants', 'deb
             .state('waitingPlayers', {
                 templateUrl : 'common/views/waiting-players.html',
                 controller : 'waitingPlayersController',
-                params : { initiator : '' }
+                params : {
+                    players : []
+                }
             });
     }])
 

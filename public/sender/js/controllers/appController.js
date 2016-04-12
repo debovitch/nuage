@@ -33,5 +33,10 @@ angular.module('nuage-sender').controller('appController',
         };
         chromecast.sendMessage(message);
     });
+
+    $rootScope.$on(MESSAGE.r2s.startGame, function() {
+
+        $state.go('startGame');
+    });
 }]);
 

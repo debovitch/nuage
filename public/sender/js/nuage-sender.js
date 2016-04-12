@@ -15,6 +15,14 @@ angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug
                 controller : 'createGameController',
                 templateUrl : 'sender/views/create-game.html'
             })
+            .state('gameAvailable', {
+                url : '/gameAvailable',
+                templateUrl : 'sender/views/game-available.html',
+                controller : 'gameAvailableController',
+                params : {
+                    initiator : ''
+                }
+            })
             .state('waitingPlayers', {
                 url : '/waitingPlayers',
                 templateUrl : 'common/views/waiting-players.html',
@@ -23,12 +31,12 @@ angular.module('nuage-sender', ['ui.router', 'nuage-common', 'constants', 'debug
                     players : []
                 }
             })
-            .state('gameAvailable', {
-                url : '/gameAvailable',
-                templateUrl : 'sender/views/game-available.html',
-                controller : 'gameAvailableController',
+            .state('startGame', {
+                url : '/startGame',
+                templateUrl : 'sender/views/start-game.html',
+                controller : 'startGameController',
                 params : {
-                    initiator : ''
+                    players : []
                 }
             });
     }])

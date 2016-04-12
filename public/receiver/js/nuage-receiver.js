@@ -14,6 +14,14 @@ angular.module('nuage-receiver', ['ui.router', 'nuage-common', 'constants', 'deb
                 params : {
                     players : []
                 }
+            })
+            .state('startGame', {
+                url : '/startGame',
+                templateUrl : 'receiver/views/start-game.html',
+                controller : 'startGameController',
+                params : {
+                    players : []
+                }
             });
     }])
 

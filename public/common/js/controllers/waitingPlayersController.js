@@ -2,57 +2,65 @@ angular.module('nuage-common').controller('waitingPlayersController',
     ['$rootScope', '$scope', '$stateParams', 'EVENT', 'MESSAGE',
         function($rootScope, $scope, $stateParams, EVENT, MESSAGE) {
 
-    $scope.start = false;
+            $scope.start = false;
 
-    $rootScope.$on(MESSAGE.r2s.gameJoined, function(event, data) {
+            $rootScope.$on(MESSAGE.r2s.gameJoined, function(event, data) {
 
-        $scope.$apply(function() {
+                $scope.$apply(function() {
 
-            refresh(data.players, data.receiver);
-        });
-    });
+                    refresh(data.players, data.receiver);
+                });
+            });
 
-    function refresh(players, receiver) {
+            $rootScope.$on(MESSAGE.r2s.playerIsReady, function(event, data) {
 
-        $scope.initiatorState = 'Partie créée par ' + players.find(function(player) {
-            return player.initiator;
-        }).username;
+                $scope.$apply(function() {
 
-        $scope.players = players.filter(function(player) {
-            return !player.initiator;
-        });
+                    //refresh(data.players, data.receiver);
+                });
+            });
 
-        $scope.players = $scope.players.map(function(player) {
-            player.state = player.username + ' a rejoint la partie';
-            return player;
-        });
+            function refresh(players, receiver) {
 
-        var missingPlayers = 3 - players.length;
+                $scope.initiatorState = 'Partie créée par ' + players.find(function(player) {
+                    return player.initiator;
+                }).username;
 
-        if (missingPlayers == 2) {
-            $scope.waitingMorePlayers = 'En attente de deux joueurs supplémentaires';
-        } else if (missingPlayers == 1) {
-            $scope.waitingMorePlayers = 'En attente d\'un joueur supplémentaire';
-        } else if (missingPlayers <= 0) {
-            $scope.waitingMorePlayers =  'Il y a suffisamment de joueurs pour démarrer';
-            if (!receiver) {
-                $scope.start = true;
+                $scope.players = players.filter(function(player) {
+                    return !player.initiator;
+                });
+
+                $scope.players = $scope.players.map(function(player) {
+                    player.state = player.username + ' a rejoint la partie';
+                    return player;
+                });
+
+                var missingPlayers = 3 - players.length;
+
+                if (missingPlayers == 2) {
+                    $scope.waitingMorePlayers = 'En attente de deux joueurs supplémentaires';
+                } else if (missingPlayers == 1) {
+                    $scope.waitingMorePlayers = 'En attente d\'un joueur supplémentaire';
+                } else if (missingPlayers <= 0) {
+                    $scope.waitingMorePlayers =  'Il y a suffisamment de joueurs pour démarrer';
+                    if (!receiver) {
+                        $scope.start = true;
+                    }
+                }
             }
-        }
-    }
 
-    $scope.ready = function() {
+            $scope.ready = function() {
 
-        $rootScope.$broadcast(EVENT.readyToPlay);
-    };
+                $rootScope.$broadcast(EVENT.readyToPlay);
+            };
 
-    $rootScope.$on(MESSAGE.r2s.readyToPlay, function(event, data) {
+            $rootScope.$on(MESSAGE.r2s.readyToPlay, function(event, data) {
 
-        $scope.$apply(function() {
+                $scope.$apply(function() {
 
-            refresh(data.players, data.receiver);
-        });
-    });
+                    refresh(data.players, data.receiver);
+                });
+            });
 
-    refresh($stateParams.players);
-}]);
+            refresh($stateParams.players);
+        }]);

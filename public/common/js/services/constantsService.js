@@ -21,6 +21,6 @@ angular.module('constants', [])
             gameAvailable : 'r2s.gameAvailable',
             gameJoined : 'r2s.gameJoined',
             playerIsReady : 'playerIsReady',
-            everybodyIsReady : 'everybodyIsReady'
+            startGame : 'startGame'
         }
     });

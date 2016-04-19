@@ -3,6 +3,7 @@ angular.module('nuage-common').controller('waitingPlayersController',
         function($rootScope, $scope, $stateParams, EVENT, MESSAGE) {
 
             $scope.start = false;
+            $scope.initiatorReady = false;
 
             $rootScope.$on(MESSAGE.r2s.gameJoined, function(event, data) {
 
@@ -16,7 +17,14 @@ angular.module('nuage-common').controller('waitingPlayersController',
 
                 $scope.$apply(function() {
 
-                    //refresh(data.players, data.receiver);
+                    var playerReady = $scope.players.find(function(player) {
+	                    return player.username == data.player;
+                    });
+	                if (playerReady) {
+		                playerReady.ready = true;
+	                } else {
+		                $scope.initiatorReady = true;
+	                }
                 });
             });
 

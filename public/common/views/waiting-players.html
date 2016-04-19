@@ -1,6 +1,6 @@
 <div class="waiting-players content">
-    <p class="bluesky">{{ initiatorState }}</p>
-    <p class="mt20 bluesky" ng-repeat="player in players">{{ player.state }}</p>
+    <p class="bluesky">{{ initiatorState }} <span ng-if="initiatorReady">: prêt</span></p>
+    <p class="mt20 bluesky" ng-repeat="player in players">{{ player.state }} <span ng-if="player.ready">: prêt</span></p>
     <p class="mt40 lightpurple">{{ waitingMorePlayers }}</p>
     <button class="mt20 violet border" ng-if="start" ng-click="ready()">Prêt</button>
 </div>

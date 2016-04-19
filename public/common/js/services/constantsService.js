@@ -13,7 +13,8 @@ angular.module('constants', [])
             connect : 's2r.connect',
             createGame : 's2r.createGame',
             joinGame : 's2r.joinGame',
-            readyToPlay : 's2r.readyToPlay'
+            readyToPlay : 's2r.readyToPlay',
+            sendWords : 's2r.sendWords'
         },
         r2s : {
             noGameAvailable : 'r2s.noGameAvailable',

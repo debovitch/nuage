@@ -52,13 +52,18 @@ angular.module('nuage-receiver').service('messageBusService',
                 if (castReceiverManagerService.manager.getSenders().length == 1) {
 
                     response.service = MESSAGE.r2s.noGameAvailable;
-
                     $rootScope.$broadcast(response.service);
 
                 } else if (castReceiverManagerService.manager.getSenders().length >= 2) {
 
-                    response.service = MESSAGE.r2s.gameAvailable;
-                    response.initiator = gameManager.getInitiator().username;
+	                var initiator = gameManager.getInitiator();
+	                if (initiator) {
+		                response.service = MESSAGE.r2s.gameAvailable;
+		                response.initiator = initiator.username;
+	                } else {
+		                response.service = MESSAGE.r2s.noGameAvailable;
+		                $rootScope.$broadcast(response.service);
+	                }
                 }
                 break;
 
@@ -94,13 +99,13 @@ angular.module('nuage-receiver').service('messageBusService',
                 sender.readyToPlay = true;
                 if (gameManager.isEverybodyReadyToPlay()) {
                     response.service = MESSAGE.r2s.startGame;
+	                that.messageBus.broadcast(JSON.stringify(response));
+	                debug.receiver('To all : ' + response.service);
                 } else {
                     response.service = MESSAGE.r2s.playerIsReady;
-                    response.player = sender;
+                    response.player = sender.username;
                 }
                 $rootScope.$broadcast(response.service, response);
-                that.messageBus.broadcast(JSON.stringify(response));
-                debug.receiver('To all : ' + response.service);
                 return;
 
             default :

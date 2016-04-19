@@ -33,4 +33,15 @@ angular.module('nuage-receiver').service('gameManager', [function() {
         }
         return true;
     };
+
+    this.didEverybodyPlay = function() {
+
+        var players = this.getPlayers();
+        for (var i = 0; i < players.length; ++i) {
+            if (!players[i].didPlay) {
+                return false;
+            }
+        }
+        return true;
+    };
 }]);

@@ -22,7 +22,12 @@ angular.module('nuage-receiver', ['ui.router', 'nuage-common', 'constants', 'deb
                 params : {
                     players : []
                 }
-            });
+            })
+	        .state('gameResult', {
+		        url : '/gameResult',
+		        templateUrl : 'receiver/views/game-result.html',
+		        controller : 'gameResultController'
+	        });
     }])
 
     .run(['$state', 'messageBusService', function($state, messageBusService) {

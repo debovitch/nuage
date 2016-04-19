@@ -26,5 +26,10 @@ angular.module('nuage-receiver').controller(
 
             $state.go('startGame');
         });
+
+        $rootScope.$on(MESSAGE.r2s.everybodyDidPlay, function() {
+
+            $state.go('gameResult');
+        });
     }]);
 

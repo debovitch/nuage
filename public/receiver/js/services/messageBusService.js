@@ -108,6 +108,15 @@ angular.module('nuage-receiver').service('messageBusService',
                 $rootScope.$broadcast(response.service, response);
                 return;
 
+	        case MESSAGE.s2r.sendWords :
+		        sender.words = message.words;
+		        sender.didPlay = true;
+	            if (gameManager.didEverybodyPlay()) {
+		            response.service = MESSAGE.r2s.everybodyDidPlay;
+		            $rootScope.$broadcast(response.service);
+	            }
+		        break;
+
             default :
                 response.service = 'Unknown service : ' + message.service;
         }

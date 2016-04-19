@@ -2,14 +2,25 @@
     <p class="bluesky">Nuage</p>
     <table>
         <thead>
-            <th>
-                <td ng-repeat="player in players">{{ player.username }}</td>
-            </th>
+            <tr><th></th><th ng-repeat="player in players">{{ player.username }}</th></tr>
         </thead>
         <tbody>
-            <tr><td ng-repeat="word in words1">{{ word }}</td></tr>
-            <tr><td ng-repeat="word in words2">{{ word }}</td></tr>
-            <tr><td ng-repeat="word in words3">{{ word }}</td></tr>
+            <tr>
+                <td>Mot 1</td>
+                <td ng-repeat="word in words1" ng-class="{ green : word.win, red : !word.win }">{{ word.word }}</td>
+            </tr>
+            <tr>
+                <td>Mot 2</td>
+                <td ng-repeat="word in words2" ng-class="{ green : word.win, red : !word.win }">{{ word.word }}</td>
+            </tr>
+            <tr>
+                <td>Mot 3</td>
+                <td ng-repeat="word in words3" ng-class="{ green : word.win, red : !word.win }">{{ word.word }}</td>
+            </tr>
+            <tr>
+                <td>Score</td>
+                <td ng-repeat="score in scores track by $index">{{ score }}</td>
+            </tr>
         </tbody>
     </table>
 </div>

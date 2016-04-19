@@ -109,7 +109,12 @@ angular.module('nuage-receiver').service('messageBusService',
                 return;
 
 	        case MESSAGE.s2r.sendWords :
-		        sender.words = message.words;
+		        sender.words = message.words.map(function(word) {
+			        return {
+				        word : word,
+				        win : false
+			        };
+		        });
 		        sender.didPlay = true;
 	            if (gameManager.didEverybodyPlay()) {
 		            response.service = MESSAGE.r2s.everybodyDidPlay;

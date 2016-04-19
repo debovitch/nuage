@@ -51,16 +51,29 @@ body {
 }
 
 .bluesky {
-    color: #37CDFF;
+    color: #37cdff;
 }
-
 .lightpurple {
-    color: #8A93C5;
+    color: #8a93c5;
 }
-
 .violet {
     color: #5e2098;
+}
+.red {
+    color: #ff6666;
+}
+.green {
+    color: #22bb33;
 }
 
 .mt20{margin-top:20px}
 .mt40{margin-top:40px}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
